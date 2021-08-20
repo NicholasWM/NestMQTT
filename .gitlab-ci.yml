@@ -1,0 +1,25 @@
+image: node:latest
+
+stages:
+  - build
+  - test
+
+cache:
+  paths:
+    - node_modules/
+
+install_dependencies:
+  tags:
+    - runner_test
+  stage: build
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
+
+test_with_lab:
+  stage: test
+  tags:
+    - runner_test
+  script: npm run start:dev
